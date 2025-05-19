@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SagradoAbadAPI.Modelos
 {
@@ -12,8 +12,6 @@ namespace SagradoAbadAPI.Modelos
         public string UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }
-
-
 
         public ICollection<CarritoDetalle> Detalles { get; set; }
     }

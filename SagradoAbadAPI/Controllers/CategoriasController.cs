@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SagradoAbadAPI.Contexto;
 using SagradoAbadAPI.DTOs.Categorias;
 using SagradoAbadAPI.Modelos;
@@ -21,7 +20,5 @@ namespace SagradoAbadAPI.Controllers
             await db.SaveChangesAsync();
             return Ok(nuevaCategoria);
         }
-
-
     }
 }

@@ -10,6 +10,7 @@ namespace SagradoAbadAPI.Modelos
 
         [Required, MaxLength(100)]
         public string NombreCategoria { get; set; }
+
         [JsonIgnore]
         public ICollection<Producto> Productos { get; set; }
     }

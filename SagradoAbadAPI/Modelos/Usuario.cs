@@ -3,9 +3,16 @@
 namespace SagradoAbadAPI.Modelos
 {
     public class Usuario
-    {
+    { 
 
-        [Key]
+
+        public enum RolUsuario
+    {
+        Administrador,
+        Cliente
+    }
+
+    [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required, MaxLength(100)]
@@ -21,8 +28,8 @@ namespace SagradoAbadAPI.Modelos
 
         public Carrito Carrito { get; set; }
 
-        public ICollection<OrdenCompra> Ordenes { get; set; }
+        public RolUsuario Rol { get; set; } = RolUsuario.Cliente;
 
-     
+        public ICollection<OrdenCompra> Ordenes { get; set; }
     }
 }

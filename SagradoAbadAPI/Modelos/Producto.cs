@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace SagradoAbadAPI.Modelos
@@ -25,8 +25,10 @@ namespace SagradoAbadAPI.Modelos
         public string ImagenPrincipal { get; set; }
 
         public ICollection<ImagenProducto> Imagenes { get; set; }
+
         [JsonIgnore]
         public ICollection<CarritoDetalle> CarritoDetalles { get; set; }
+
         [JsonIgnore]
         public ICollection<OrdenDetalle> DetalleOrdenes { get; set; }
     }
