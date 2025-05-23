@@ -15,5 +15,6 @@ namespace SagradoAbadAPI.DTOs.Ordenes
         public string MetodoPago { get; set; }
 
         public string EstadoEnvio { get; set; }
+        public List<DetalleOrdenDTO> Detalles { get; set; }
     }
 }

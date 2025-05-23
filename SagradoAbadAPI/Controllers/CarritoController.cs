@@ -11,8 +11,29 @@ namespace SagradoAbadAPI.Controllers
     [ApiController]
     public class CarritoController(ContextoDb db) : ControllerBase
     {
+        [HttpDelete("{detalleId}")]
+        public async Task<ActionResult<string>>  EliminarCarritoDetalle(string detalleId)
+        {
+            try
+            {
+                var detalle = await db.CarritoDetalles.FirstOrDefaultAsync(d => d.IdDetalle == detalleId);
+                if (detalle == null)
+                {
+                    return NotFound("Detalle no encontrado");
+                }
+                db.CarritoDetalles.Remove(detalle);
+                await db.SaveChangesAsync();
+                return Ok("Producto eliminado del carrito");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("addProducto")]
-        public async Task<ActionResult<CarritoDetalle>> AddProductoToCarrito(NuevoCarritoDetalleDTO carritoDetalleData)
+        public async Task<ActionResult<string>> AddProductoToCarrito(NuevoCarritoDetalleDTO carritoDetalleData)
         {
             try
             {
@@ -35,13 +56,39 @@ namespace SagradoAbadAPI.Controllers
                 };
                 await db.CarritoDetalles.AddAsync(carritoDetalle);
                 await db.SaveChangesAsync();
-                return Ok(carritoDetalle);
+                return Ok("Producto agregado");
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                Console.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("{detalleId}")]
+        public async Task<ActionResult<string>> ActualizarCarritoDetalleCantidad(string detalleId, [FromBody] int nuevaCantidad)
+        {
+            try
+            {
+                var detalle = await db.CarritoDetalles.FirstOrDefaultAsync(d => d.IdDetalle == detalleId);
+                if (detalle == null)
+                {
+                    return NotFound("Detalle no encontrado");
+                }
+
+                detalle.Cantidad = nuevaCantidad;
+                await db.SaveChangesAsync();
+
+                return Ok("Cantidad actualizada");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al actualizar el detalle del carrito");
+            }
+        }
+
+       
+
 
         [HttpGet("{userId}")]
         public async Task<ActionResult<IEnumerable<Carrito>>> GetCarrito(string userId)
