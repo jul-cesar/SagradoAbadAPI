@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SagradoAbadAPI.DTOs.Carritos
 {
-    public class NuevoCarritoDetalle
+    public class NuevoCarritoDetalleDTO
     {
       
       
@@ -16,5 +16,7 @@ namespace SagradoAbadAPI.DTOs.Carritos
        
 
         public int Cantidad { get; set; }
+
+        
     }
 }

@@ -8,8 +8,7 @@ namespace SagradoAbadAPI.DTOs.Ordenes
 
       
 
-        [Column(TypeName = "decimal(10,3)")]
-        public decimal Total { get; set; }
+    
 
         public string MetodoPago { get; set; }
 

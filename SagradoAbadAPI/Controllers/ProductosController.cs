@@ -30,7 +30,7 @@ namespace SagradoAbadAPI.Controllers
                     Descripcion = NuevoProducto.Descripcion,
                     ImagenPrincipal = NuevoProducto.ImagenPrincipal,
                     Precio = NuevoProducto.Precio,
-                    CategoriaId = NuevoProducto.CategoriaId,
+                    Categoria = NuevoProducto.Categoria,
                 };
                 await db.Productos.AddAsync(NuevoProducto);
                 await db.SaveChangesAsync();
@@ -47,7 +47,7 @@ namespace SagradoAbadAPI.Controllers
         {
             try
             {
-                var productos = await db.Productos.ToListAsync();
+                var productos = await db.Productos.Include(p => p.Categoria).ToListAsync();
                 var productosResponse = new List<ProductoDTO>();
                 foreach (var producto in productos)
                 {
@@ -58,7 +58,8 @@ namespace SagradoAbadAPI.Controllers
                         Descripcion = producto.Descripcion,
                         ImagenPrincipal = producto.ImagenPrincipal,
                         Precio = producto.Precio,
-                        CategoriaId = producto.CategoriaId,
+                     
+                        Categoria = producto.Categoria, 
                     };
                     productosResponse.Add(productoResponse);
                 }

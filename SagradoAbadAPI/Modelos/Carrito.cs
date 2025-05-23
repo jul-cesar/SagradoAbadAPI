@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SagradoAbadAPI.Modelos
 {
@@ -10,7 +11,7 @@ namespace SagradoAbadAPI.Modelos
 
         [ForeignKey("Usuario")]
         public string UsuarioId { get; set; }
-
+        [JsonIgnore]
         public Usuario Usuario { get; set; }
 
         public ICollection<CarritoDetalle> Detalles { get; set; }
